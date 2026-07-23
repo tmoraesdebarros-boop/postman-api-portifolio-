@@ -1,0 +1,136 @@
+{
+  "info": {
+    "_postman_id": "528e818a-92cb-4d16-bb2e-d3866f4a1213",
+    "name": "Creating variables [Thalita moraes de barros]",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55890710",
+    "_collection_link": "https://go.postman.co/collection/55890710-528e818a-92cb-4d16-bb2e-d3866f4a1213?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Sign Up",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Assert status code is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "// This constant contains value of \"token\" property in the response body.",
+              "const token = pm.response.json().user.token;",
+              "pm.collectionVariables.set(\"tokenConduit\", token);",
+              "/*",
+              "  Set the new collection variable:",
+              "",
+              "  1. Find and use a spippet \"Set collection variable\".",
+              "  2. Replace \"variable_key\" with a name of your future variable: \"tokenConduit\".",
+              "  3. Replace \"variable_value\" with a token constant above.",
+              "*/",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user\": {\n    \"username\": \"{{$randomFirstName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"W@lterWh1te\"\n  }\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}users",
+          "host": [
+            "{{BASE_URL}}users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create an article",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Assert status code is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{tokenConduit}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"article\": {\n    \"title\": \"There is a Hell\",\n    \"description\": \"Believe Me I've Seen It\",\n    \"body\": \"There is a Heaven\",\n    \"tagList\": [\"Let's\", \"Keep\", \"it\", \"a\", \"Secret\"]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}articles",
+          "host": [
+            "{{BASE_URL}}articles"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": ""
+    },
+    {
+      "key": "tokenConduit",
+      "value": ""
+    }
+  ]
+}

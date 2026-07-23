@@ -1,0 +1,491 @@
+{
+  "info": {
+    "_postman_id": "7d623311-9c56-483e-9e56-a9c7f5ba77d3",
+    "name": "Postman extended [Thalita Moraes]",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55890710",
+    "_collection_link": "https://go.postman.co/collection/55890710-7d623311-9c56-483e-9e56-a9c7f5ba77d3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Registro",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('assert status code is 200', ()=> {\r",
+              "       pm.response.to.have.status(200)\r",
+              "\r",
+              "});\r",
+              "\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Status Code é 200\", () => {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"O objeto user existe\", () => {\r",
+              "    pm.expect(response).to.have.property(\"user\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"O usuário possui username\", () => {\r",
+              "    pm.expect(response.user).to.have.property(\"username\");\r",
+              "    pm.expect(response.user.username).to.be.a(\"string\");\r",
+              "    pm.expect(response.user.username).to.include(\"novousuario_\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"O usuário possui email\", () => {\r",
+              "    pm.expect(response.user).to.have.property(\"email\");\r",
+              "    pm.expect(response.user.email).to.be.a(\"string\");\r",
+              "    pm.expect(response.user.email).to.include(\"@post.com\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"O usuário possui token\", () => {\r",
+              "    pm.expect(response.user).to.have.property(\"token\");\r",
+              "    pm.expect(response.user.token).to.be.a(\"string\");\r",
+              "    pm.expect(response.user.token).to.not.be.empty;\r",
+              "});\r",
+              "\r",
+              "\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authorization_secret}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user\": {\n    \"username\": \"novousuario_{{$randomInt}}\",\n    \"email\": \"novoemail{{$randomInt}}@post.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/users",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();\r",
+              "\r",
+              "console.log(response);\r",
+              "\r",
+              "pm.test(\"Mostra resposta\", () => {\r",
+              "    pm.expect(response).to.exist;\r",
+              "});\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authorization_secret}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"user\": {\r\n    \"email\": \"novoemail@post.com\",\r\n    \"password\": \"{{passwordConduit}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/users/login",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "users",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Criar um artigo",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status Code é 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "if (pm.response.code === 200) {\r",
+              "    const response = pm.response.json();\r",
+              "\r",
+              "    pm.test(\"Título\", function () {\r",
+              "        pm.expect(response.article.title).to.include(\"Meu artigo\");\r",
+              "    });\r",
+              "\r",
+              "\r",
+              "const responseData = pm.response.json();\r",
+              "\r",
+              "\r",
+              "const articleSlug = responseData.article.slug;\r",
+              "\r",
+              "\r",
+              "pm.collectionVariables.set(\"articleSlug\", articleSlug);\r",
+              "   \r",
+              "    \r",
+              "}\r",
+              "   "
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authorization_secret}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"article\": {\r\n    \"title\": \"Meu artigo {{$randomInt}}\",\r\n    \"description\": \"teste\",\r\n    \"body\": \"Este é o do artigo  testes.\",\r\n    \"tagList\": []\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/articles",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "articles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Postar Comentario",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "if (pm.response.code === 200) {\r",
+              "    const response = pm.response.json();\r",
+              "\r",
+              "    pm.test(\"comentario criado\", function () {\r",
+              "        pm.expect(response.comment.body).to.eql(\"esse é meu comentario\");\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"comentario possui ID\", function () {\r",
+              "        pm.expect(response.comment.id).to.exist;\r",
+              "    });\r",
+              "const commentData = pm.response.json();\r",
+              "\r",
+              "const commentId = commentData.comment.id;\r",
+              "\r",
+              "pm.collectionVariables.set(\"commentId\", commentId);\r",
+              "    \r",
+              "   \r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authorization_secret}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"comment\":{\r\n    \"body\": \"esse é meu comentario\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/articles/{{articleSlug}}/comments",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "articles",
+            "{{articleSlug}}",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Excluir um comentário",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status Code é 204\", function () {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authorization_secret}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/articles/{{articleSlug}}/comments/{{commentId}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "articles",
+            "{{articleSlug}}",
+            "comments",
+            "{{commentId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Excluir um artigo",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status Code é 204\", function () {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authorization_secret}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/articles/{{articleSlug}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "articles",
+            "{{articleSlug}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "https://conduit.mate.academy/api"
+    },
+    {
+      "key": " passwordConduit ",
+      "value": "12345678"
+    },
+    {
+      "key": "emailConduit\n",
+      "value": "novoemail@post.com"
+    },
+    {
+      "key": "tokenConduit",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIyNDUyOSwidXNlcm5hbWUiOiJub3ZvdXN1YXJpb183NzUiLCJleHAiOjE3ODk1MDYwMDUsImlhdCI6MTc4NDMyMjAwNX0.IVe7oPCiPuZjwHuRBbzOv12O4ov2DSBytkbV06nSyDQ"
+    },
+    {
+      "key": "idcomentario",
+      "value": ""
+    },
+    {
+      "key": "passwordConduit",
+      "value": ""
+    },
+    {
+      "key": "authorization_secret",
+      "value": ""
+    },
+    {
+      "key": "articleSlug",
+      "value": ""
+    },
+    {
+      "key": "commentId",
+      "value": ""
+    }
+  ]
+}
