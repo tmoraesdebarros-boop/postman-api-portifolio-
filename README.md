@@ -69,7 +69,7 @@ POST /api/users/login
 
 **📸 Evidência**
 
-<img src="evidencias/login.png" alt="POST Login">
+<img src="evidencias/login.png" alt="POST Login" width="800">
 
 ---
 
