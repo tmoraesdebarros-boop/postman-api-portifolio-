@@ -37,11 +37,12 @@ POST /api/users
 
 **📸 Evidência**
 
-evidencias/Registro.png
+<img width="601" height="418" alt="Registro" src="https://github.com/user-attachments/assets/35373848-d02a-4d6d-8470-294c32e993fa" />
 
 ---
 
 ### 🔹 POST — Login
+
 
 **🎯 Objetivo**
 
@@ -69,8 +70,8 @@ POST /api/users/login
 
 **📸 Evidência**
 
-<img width="601" height="418" alt="Registro" src="https://github.com/user-attachments/assets/35373848-d02a-4d6d-8470-294c32e993fa" />
 
+<img width="596" height="419" alt="Login" src="https://github.com/user-attachments/assets/f9960fc7-bd33-418a-ac84-ca3ba3c442a6" />
 
 ---
 
@@ -102,11 +103,8 @@ PUT /api/user
 
 **📸 Evidência**
 
-```markdown
-![PUT Update User](evidences/put-update-user.png)
-```
+<img width="601" height="420" alt="Update" src="https://github.com/user-attachments/assets/4e95f098-d533-4a31-b519-7be611557bf1" />
 
-![PUT Update User](evidences/put-update-user.png)
 
 ---
 
@@ -138,13 +136,8 @@ POST /api/profiles/{username}/follow
 
 **📸 Evidência**
 
-```markdown
-![POST Follow User](evidences/post-follow-user.png)
-```
+<img width="607" height="414" alt="Follow" src="https://github.com/user-attachments/assets/66e9f0fb-0aa2-4ad6-8990-077282e97409" />
 
-![POST Follow User](evidences/post-follow-user.png)
-
----
 
 ### 🔹 DELETE — Unfollow User
 
@@ -174,13 +167,10 @@ DELETE /api/profiles/{username}/follow
 
 **📸 Evidência**
 
-```markdown
-![DELETE Unfollow User](evidences/delete-unfollow-user.png)
-```
+<img width="590" height="421" alt="Unfollow" src="https://github.com/user-attachments/assets/898ffdec-733d-416d-943c-8f5b9d2bfb57" />
 
-![DELETE Unfollow User](evidences/delete-unfollow-user.png)
 
----
+
 
 ## 📋 Resumo dos testes
 
