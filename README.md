@@ -69,7 +69,8 @@ POST /api/users/login
 
 **📸 Evidência**
 
-<img src="evidencias/login.png" alt="POST Login" width="800">
+<img width="601" height="418" alt="Registro" src="https://github.com/user-attachments/assets/35373848-d02a-4d6d-8470-294c32e993fa" />
+
 
 ---
 
