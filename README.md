@@ -73,10 +73,6 @@ POST /api/users/login
 
 **📸 Evidência**
 
-```markdown
-![POST Login](evidences/post-login.png)
-```
-
 ![POST Login](evidences/post-login.png)
 
 ---
