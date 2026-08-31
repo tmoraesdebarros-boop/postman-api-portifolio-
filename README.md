@@ -37,11 +37,7 @@ POST /api/users
 
 **📸 Evidência**
 
-```markdown
-![POST Registration](evidences/post-registration.png)
-```
-
-![POST Registration](evidences/post-registration.png)
+evidencias/Registro.png
 
 ---
 
